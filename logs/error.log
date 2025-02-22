@@ -1,0 +1,14 @@
+
+Sat Feb 22 2025 17:19:00 GMT+0100 (heure normale d’Europe centrale) Name :  TypeError Message :  isEmail is not a functionStack :  TypeError: isEmail is not a function
+    at signIn1 (/Users/youssef/Documents/User logging api/api2/routes/accountRouter/Controllers/signIn1.ts:37:24)
+    at Layer.handle [as handle_request] (/Users/youssef/Documents/User logging api/api2/node_modules/express/lib/router/layer.js:95:5)
+    at next (/Users/youssef/Documents/User logging api/api2/node_modules/express/lib/router/route.js:149:13)
+    at Route.dispatch (/Users/youssef/Documents/User logging api/api2/node_modules/express/lib/router/route.js:119:3)
+    at Layer.handle [as handle_request] (/Users/youssef/Documents/User logging api/api2/node_modules/express/lib/router/layer.js:95:5)
+    at /Users/youssef/Documents/User logging api/api2/node_modules/express/lib/router/index.js:284:15
+    at Function.process_params (/Users/youssef/Documents/User logging api/api2/node_modules/express/lib/router/index.js:346:12)
+    at next (/Users/youssef/Documents/User logging api/api2/node_modules/express/lib/router/index.js:280:10)
+    at Function.handle (/Users/youssef/Documents/User logging api/api2/node_modules/express/lib/router/index.js:175:3)
+    at router (/Users/youssef/Documents/User logging api/api2/node_modules/express/lib/router/index.js:47:12)
+
+Sat Feb 22 2025 17:41:19 GMT+0100 (heure normale d’Europe centrale)
