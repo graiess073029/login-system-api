@@ -1,3 +1,4 @@
+import bcrypt from 'bcryptjs';
 import {config} from '../../config.js'
 import { SqlResponse } from '../../types/types.js'
 import { log } from '../../utils/log.js';
@@ -7,15 +8,15 @@ export const updatePassword = async (userParams : {email : string , newPassword 
 
     let {  email , newPassword} = userParams;
 
+    newPassword = await bcrypt.hash(newPassword,10)
+
     let query : string = `UPDATE ${config.database.tableName} SET password="${newPassword}" WHERE email="${email}";`;
     let passwordUpdateQuery = await pool.query(query)
 
     .then(
         async (res) => {
-            let date = new Date().toString()
-            let message = `-----\n Query : ${query}\n Date : ${date}\n-----\n`
 
-            await log(message, "info")
+            await log(`Query : ${query}`,'info')
 
             let response : SqlResponse;
 
@@ -39,7 +40,7 @@ export const updatePassword = async (userParams : {email : string , newPassword 
     .catch(
         async (err : Error) => { 
 
-            await log(err.message, "info")
+            await log(err.message, "error")
 
             let response : SqlResponse = {
                 state : "error",
@@ -78,7 +79,7 @@ export const updatePassword = async (userParams : {email : string , newPassword 
     .catch(
         async (err : Error) => { 
 
-            await log(err.message, "info")
+            await log(err.message, "error")
 
             let response : SqlResponse = {
                 state : "error",

@@ -3,9 +3,9 @@ import { appendFile } from "fs/promises";
 import chalk from "chalk";
 import { CustomRequest } from "../../types/types.js";
 
-
-
-
+/**
+ * A middleware that logs the request in the console and in the "requests.log" file
+*/
 
 export const logger1 : RequestHandler = async (req: CustomRequest, res: Response, next: NextFunction) : Promise<void> =>  {
     const line: string = "\n";

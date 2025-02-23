@@ -7,11 +7,18 @@ import { deleteToken } from '../../../db/resetTable/deleteToken.js';
 import { updateState } from '../../../db/resetTable/updateState.js';
 import bcrypt from 'bcryptjs';
 
+/**
+ * Handles the password reset request by verifying the reset token
+ * and updating the password of the user if the token is valid.
+ * If the token is invalid, it returns an error response.
+ */
 export const changePassword : RequestHandler = async (req: Request, res: CustomResponse, next: NextFunction): Promise<any> => {
 
     try{
 
         const {reset_token} = req.cookies
+
+        // Verifying the token and its state to be valid
 
         if (!reset_token?.length){
             let response : HttpResponse = {
@@ -85,7 +92,7 @@ export const changePassword : RequestHandler = async (req: Request, res: CustomR
             return;
         }
 
-        // Getting params from the request
+    // Getting params from the request
         let { newPassword } = req.body
     
     // Verifying if the new password are valid 

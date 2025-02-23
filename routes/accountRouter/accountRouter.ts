@@ -10,17 +10,17 @@ import { changePassword } from './Controllers/changePassword.js';
 import { passwordMiss } from './Controllers/passwordMiss.js';
 import { resetPassword } from './Controllers/resetPassword.js';
 
-// Router
+/**
+ * This file contains the routes for the account router
+*/
 
 export const accountRouter = Router()
 
-// Get Routes
 
 accountRouter.get("/generalSettings",getGeneralSettings)
 
 accountRouter.get("/resetPassword/:resetToken/:email", resetPassword)
 
-// Post Routes
 
 accountRouter.post('/passwordMiss', passwordMiss)
 
@@ -34,7 +34,6 @@ accountRouter.post("/signin", signIn1)
 
 accountRouter.post("/login", login )
 
-// Put Routes
 
 accountRouter.put("/generalSettings", generalSettings)
 accountRouter.put("/securitySettings", securitySettings)

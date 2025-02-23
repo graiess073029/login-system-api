@@ -1,3 +1,4 @@
+
 import { afterAll, beforeAll, expect } from "@jest/globals"
 import { describe, it } from '@jest/globals';
 import request from 'supertest';
@@ -6,19 +7,34 @@ import { deleteUser } from "./db/accountTable/deleteUser.js";
 import { select } from "./db/select.js";
 import pool from "./db/initPool.js";
 import { config } from "./config.js";
-import { QueryResult } from "mysql2/index.js";
+
+/**
+ * @fileoverview API Integration Test Suite
+ * Tests user authentication, account management, and settings functionality
+ * 
+ * @requires jest
+ * @requires supertest
+ * @requires ./app
+ * @requires ./db/accountTable/deleteUser
+ * @requires ./db/select
+ * @requires ./db/initPool
+ * @requires ./config
+ */
 
 
-/*
-Before testing the api, we need to make sure that the Accounts table does not contain a user with these params:
-    . username : test 
-    . email : email.test@test.com
-    ( . password : hhHHp$124$$mmM)
-*/
+
+/**
+ * Basic API endpoint tests
+ * Validates core API functionality and error handling
+ */
 
 
 describe("Api classic tests", () => {
 
+     /**
+     * Tests the root endpoint response
+     * @expect Returns 200 status with success message
+     */
     it("Api root endpoint testing", async () => {
         const response = await request(server).get("/");
         expect(response.status).toBe(200);
@@ -30,6 +46,10 @@ describe("Api classic tests", () => {
         });
     });
 
+     /**
+     * Tests 404 error handling
+     * @expect Returns 404 status for unhandled routes
+     */
     it("404 statusCode rendering", async () => {
         const response = await request(server).get("/anyRouteNotHandled");
         expect(response.status).toBe(404);
@@ -43,9 +63,18 @@ describe("Api classic tests", () => {
 
 });
 
+/**
+ * Input Validation Test Suite
+ * Validates request payload requirements and format checking
+ */
+
 describe('Input validation tests',() => {
 
-    // Login Endpoint
+     /**
+     * Tests login endpoint input validation
+     * @expect Validates presence of email/username and password
+     * @expect Validates email format
+     */
 
     it("identifier : email & username validation (Login endpoint)", async () => {
         const response = await request(server).post("/account/login").send({});
@@ -80,7 +109,6 @@ describe('Input validation tests',() => {
         });
     });
 
-    // Signin Endpoint
 
     it("username validation (Signin endpoint)", async () => {
         const response = await request(server).post("/account/signin").send({});
@@ -116,7 +144,6 @@ describe('Input validation tests',() => {
         });
     });
 
-    // Password Miss endpoint
 
     it("email format validation (Password miss endpoint)", async () => {
         const response = await request(server).post("/account/passwordMiss").send({email : "mmmmmmmmmm"});
@@ -136,13 +163,25 @@ describe('Input validation tests',() => {
 
 })
 
+
+/**
+ * Functional Test Suite
+ * Tests complete user lifecycle and account management features
+ * @note These test are dependent on each other and should be run in order
+ * @require a clean database to test 
+ */
+
 describe("Functionality tests",  () => {
 
     const agent = request.agent(server)
 
+    /**
+     * Test Setup
+     * Cleans up any existing test users before running tests
+     */
+
     beforeAll( async () => {
 
-        // Deleting the test user / users if it exists.
 
         const user_id : Array<{id : string}> = await select(config.database.tableName,"id","username='test' OR username='test2' OR username='test3'") as Array<{id : string}>
 
@@ -151,6 +190,11 @@ describe("Functionality tests",  () => {
     })
 
 
+    /**
+     * User Creation Test
+     * @expect Successfully creates new user with test credentials
+     * @timeout 5000ms
+     */
 
     it("Creating a new user", async () => {
 
@@ -168,7 +212,14 @@ describe("Functionality tests",  () => {
         })
 
 
-    }, 10000)
+    }, 5000)
+
+    /**
+      * Session Management Test
+     * @expect Prevents duplicate login attempts
+     * @timeout 5000ms
+     */ 
+
 
     it("Logging in just after signing in", async () => {
         
@@ -184,7 +235,15 @@ describe("Functionality tests",  () => {
             statusCode: 403
         })
 
-    }, 10000)
+    }, 5000)
+
+
+    /**
+     * Tests logout functionality
+     * @expect Successfully logs out user and redirects to login
+     * @timeout 5000ms
+     */
+
 
     it("Logging out", async () => {
         
@@ -192,7 +251,14 @@ describe("Functionality tests",  () => {
 
         expect(response.body).toEqual({state : "redirection", message : 'logged out successfullly' ,link : '/account/login', statusCode : 200})
 
-    }, 10000)
+    }, 5000)
+
+
+     /**
+     * Tests login with both username and email
+     * @expect Successfully logs in with either credential type
+     * @timeout 5000ms
+     */
 
     it("Logging in (using the username and the email)", async () => {
 
@@ -221,7 +287,13 @@ describe("Functionality tests",  () => {
         })
 
 
-    }, 10000)
+    }, 5000)
+
+    /**
+     * Tests fetching user settings
+     * @expect Returns user profile data with email and username
+     * @timeout 5000ms
+     */
 
     it('Getting general settings (user info : username - email)', async () => {
 
@@ -234,7 +306,13 @@ describe("Functionality tests",  () => {
             message : expect.objectContaining({email : expect.any(String), username : expect.any(String)})
         })
 
-    }, 10000)
+    }, 5000)
+
+     /**
+     * Tests username update functionality
+     * @expect Successfully updates username and returns 200 status
+     * @timeout 5000ms
+     */
 
     it('Updating username', async () => {
 
@@ -246,7 +324,13 @@ describe("Functionality tests",  () => {
             link: "",
             statusCode: 200,
         })
-    }, 10000)
+    }, 5000)
+
+    /**
+     * Tests email update functionality
+     * @expect Successfully updates email and returns 200 status
+     * @timeout 5000ms
+     */
 
     it('Updating email', async () => {
 
@@ -258,7 +342,13 @@ describe("Functionality tests",  () => {
             link: "",
             statusCode: 200,
         })
-    }, 10000)
+    }, 5000)
+
+    /**
+     * Tests simultaneous username and email update
+     * @expect Successfully updates both fields and returns 200 status
+     * @timeout 5000ms
+     */
 
     it('Updating username and email', async () => {
 
@@ -274,7 +364,13 @@ describe("Functionality tests",  () => {
             link: "",
             statusCode: 200,
         })
-    }, 10000)
+    }, 5000)
+
+    /**
+     * Tests password update functionality
+     * @expect Successfully updates password and returns 200 status
+     * @timeout 5000ms
+     */
 
     it('Updating password', async () => {
 
@@ -291,12 +387,16 @@ describe("Functionality tests",  () => {
             link: "",
             statusCode: 200,
         })
-    }, 10000)
-
+    }, 5000)
+    
+    /**
+     * Tests account deletion
+     * @expect Successfully deletes user and redirects to login
+     * @timeout 5000ms
+     */
 
     it('Deleting the user', async () => {
 
-        // Logging again with the new password.
 
         await agent.post("/account/login").send({
             username : "test3",
@@ -311,10 +411,14 @@ describe("Functionality tests",  () => {
             link: "/account/login",
             statusCode: 200,
         })
-    }, 10000)
-
+    }, 5000)
 
 })
+
+/**
+ * Cleanup hook
+ * @afterAll Closes server and database connections
+ */
 
 afterAll(() => {
     server.close();

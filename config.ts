@@ -1,7 +1,11 @@
 import dotenv  from 'dotenv';
 import { appConfig } from "./types/types.js";
 
-
+/**
+ * This file contains the configuration for the application.
+ * The configuration is loaded from the .env file.
+ * @module config
+ */
 
 dotenv.config()
 

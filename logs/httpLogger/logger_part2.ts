@@ -4,7 +4,9 @@ import { NextFunction, RequestHandler } from "express";
 import { CustomResponse } from "../../types/types.js";
 import { CustomRequest } from "../../types/types.js";
 
-
+/**
+ * Logs the request in the console and in the "requests.log" file after the response has been sent.
+ */
 
 export const logger2 : RequestHandler = async (req : CustomRequest , res : CustomResponse, next : NextFunction) : Promise<void> => {
     const line: string = "\n";

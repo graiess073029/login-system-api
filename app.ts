@@ -13,10 +13,16 @@ import express,  { Application, NextFunction , Request } from "express"
 import { HttpResponse } from './types/types.js';
 import { CustomResponse } from './types/types.js';
 
+/**
+ * @fileoverview Main Express application setup and configuration
+ * Configures middleware, session handling, and routes for the authentication API
+ */
+
+
 dotenv.config()
  
 
-// Initialazing Express app and the Http server
+
 const app: Application = express()
 const server = createServer(app)
 
@@ -26,8 +32,6 @@ const corsOptions = {
     credentials: true, 
     optionsSuccessStatus: 200 
 };
-
-// Express app Middlewares
 
 app.use(logger1)
 app.use(helmet())
@@ -50,7 +54,7 @@ app.use(express.json());
 
 app.use(authVerif)
 
-// Express app Routes
+
 app.use("/account", accountRouter)
 
 

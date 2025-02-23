@@ -7,6 +7,16 @@ import { select } from "../../../db/select.js";
 import isEmail from "validator/lib/isEmail.js";
 
 
+/**
+ * Handles user login requests by validating input parameters
+ * and authenticating the user. Validates the presence and format
+ * of email or username and checks the password. If successful, retrieves
+ * user information from the database, generates an authentication token,
+ * and sends it as a cookie, along with a success response. Otherwise,
+ * returns an error response with appropriate status codes based on the
+ * validation results or internal errors.
+ */
+
 export const login : RequestHandler = async (req: Request, res: CustomResponse, next: NextFunction): Promise<any> => {
 
     try {

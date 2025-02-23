@@ -2,6 +2,14 @@ import { NextFunction, Request, ErrorRequestHandler } from "express";
 import { appendFile } from "fs/promises";
 import { CustomResponse, HttpResponse } from "../../types/types.js";
 
+/**
+ * Error logging middleware for Express applications.
+ *
+ * This middleware function logs error details to a file and sends a 
+ * response to the client if headers have not been sent. It logs the 
+ * error name, message, stack, and cause to a designated error log file.
+ */
+
 export const errorLogger : ErrorRequestHandler = async (err : Error , req : Request , res : CustomResponse , next : NextFunction) : Promise<void> =>{
     const line : string = "\n";
     const path : string = process.cwd() + "/logs/error.log";

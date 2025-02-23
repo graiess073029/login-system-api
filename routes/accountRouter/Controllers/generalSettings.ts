@@ -5,6 +5,12 @@ import {config} from '../../../config.js'
 import jwt, { JwtPayload } from 'jsonwebtoken'
 import { select } from "../../../db/select.js";
 
+    /**
+     * @description This function is used to update the general settings of a user
+     *              It takes the new email and the new username as parameters
+     *              It will verify if one of the parameters are valid and update the user's settings if it is
+     *              It will also return a response to the user with a success or error message
+     */
 export const generalSettings : RequestHandler = async (req: Request, res: CustomResponse, next: NextFunction): Promise<any> => {
 
     // Getting params from the request

@@ -1,11 +1,16 @@
 import { Response, Request, CookieOptions } from "express";
 
+/**
+ * @fileoverview Type definitions for HTTP responses and database operations
+ * Contains interfaces and types used throughout the application
+ */
+
 export interface CustomResponse extends Response {
   body? : HttpResponse
 }
 
 export interface CustomRequest extends Request {
-  startTime?  : Date;
+  startTime?  : Date; // Request processing start time
 }
 
 export interface databaseParams {
@@ -18,7 +23,7 @@ export interface databaseParams {
 }
 
 export interface mailerParams {
-  smtp : string,
+  smtp : string, // smtp server
   port : number,
   user : string,
   password : string
@@ -35,7 +40,7 @@ export interface appConfig{
 }
 
 export interface ConditionParams {
-  columns: string | Array<string>;
+  columns: string | Array<string>; 
   value: string | Array<string>;
 }
 
@@ -50,7 +55,7 @@ export interface User {
 }
 
 export interface SqlResponse {
-  state: string;
+  state: 'success' | "error" | "redirection" ;
   message: string | object;
 }
 
@@ -60,22 +65,15 @@ export interface SqlResponses {
 
 export interface HttpResponse {
   statusCode: number;
-  state: string;
+  state: 'success' | 'error' | 'redirection';
   message: string | object;
   link: string;
-  token?: string;
 }
 
 export interface authToken {
   username: string;
   id: string;
   state: string;
-}
-
-export interface SignRequest1 {
-  username: string;
-  email: string;
-  password: string;
 }
 
 export interface userLoginParams {

@@ -4,6 +4,19 @@ import {config} from '../../config.js'
 import pool from '../initPool.js';
 import { verifyExistingUsers } from './create.js';
 
+    /**
+     * This function updates the email and/or the username of a user in the database.
+     * 
+     * @param userParams - An object with the following properties:
+     *   - id: number - The id of the user
+     *   - username: string - The current username of the user
+     *   - newEmail?: string - The new email of the user (optional)
+     *   - newUsername?: string - The new username of the user (optional)
+     * 
+     * @returns SqlResponse - A response object with a message and a state
+     * 
+     * @throws Error - If the user is not found or if an error occurs
+     */
 export const setGeneralSettings = async (userParams : {id : number , username : string ,newEmail? : string , newUsername? : string }) : Promise<SqlResponse>  => {
 
     let { username , id , newEmail, newUsername} = userParams;
@@ -54,7 +67,7 @@ export const setGeneralSettings = async (userParams : {id : number , username : 
     .catch(
         async (err : Error) => { 
 
-            await log((err as Error).message, "info")
+            await log((err as Error).message, "error")
 
     
             let response : SqlResponse = {

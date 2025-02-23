@@ -7,6 +7,19 @@ import {config} from '../../../config.js'
 import isEmail  from "validator/lib/isEmail.js";
 import isStrongPassword from "validator/lib/isStrongPassword.js";
 import bcrypt from "bcryptjs";
+
+/**
+ * Handles user sign-in requests by validating input parameters and
+ * creating a new user account if validations pass. Checks for a valid
+ * username, email, and strong password. If successful, hashes the password,
+ * creates the user in the database, generates an authentication token, and
+ * sends it as a cookie, along with a success response. Otherwise, returns
+ * an error response with appropriate status codes based on the validation
+ * results or internal errors.
+ *
+ * @returns void
+ */
+
 export const signIn1: RequestHandler = async (
     req: Request,
     res: CustomResponse,

@@ -6,6 +6,9 @@ import { select } from '../select.js'
 import pool from '../initPool.js'
 
 
+    /**
+     * Verify if a given value in the given column exists in the account table 
+     */
 export const verifyExistingUsers = async (column : string , value : string) : Promise<boolean> => {
     let res = await select(config.database.tableName,"*",column + "=" + `"${value}"`)
     if (res instanceof Array && res.length > 0) {
@@ -15,6 +18,19 @@ export const verifyExistingUsers = async (column : string , value : string) : Pr
     return false
 }
 
+    /**
+     * Creates a new user account in the database
+     * 
+     * @param userParams - Object with the following properties:
+     *   - username: string
+     *   - password: string
+     *   - email: string
+     *   - id: string
+     * 
+     * @returns SqlResponse - The result of the query
+     * 
+     * @throws Error - If the user already exists
+     */
 export const createUser1 = async (userParams : {
     username : string,
     password : string,
@@ -47,8 +63,7 @@ export const createUser1 = async (userParams : {
         let query = `INSERT INTO ${config.database.tableName} (id,username,email,password) VALUES ("${id}","${username}","${email}","${password}");`
         let [res,feildsAffected] = await pool.query(query)
         let date = new Date().toString()
-        let message = `-----\n Query : ${query}\n Date : ${date}\n-----\n`
-        await appendFile(process.cwd() + "/logs/info.log",message) 
+        await log(`Query : ${query}`,'info')
 
         let response : SqlResponse = {
             state : "success",
@@ -60,7 +75,7 @@ export const createUser1 = async (userParams : {
     }
     
     catch(err){
-        await log((err as Error).message, "info")
+        await log((err as Error).message, "error")
         
         let response : SqlResponse = {
             state : "error",

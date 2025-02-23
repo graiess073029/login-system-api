@@ -4,7 +4,16 @@ import jwt, { JwtPayload } from "jsonwebtoken";
 import { authToken, CustomRequest, HttpResponse, User } from "../types/types.js";
 import { select } from "../db/select.js";
 
-// Verifying if the user have the necessary authorization to access to the desired route
+/**
+ * This middleware verifies the authenticity of the user using a JSON Web Token.
+ * It checks if the request path is a registration path, an authentication path, or a path that needs authentication.
+ * If the request path is a registration path, the middleware verifies if the user is not logged in.
+ * If the request path is an authentication path, the middleware verifies if the user is logged in.
+ * If the request path needs authentication, the middleware verifies if the user is logged in and if the user is authorized.
+ * If the user is not authorized, the middleware sends a response with a 401 status code and a redirection link to the login page.
+ * If the user is authorized, the middleware sends a response with a 200 status code.
+ */
+
 export const authVerif : RequestHandler = async (req: CustomRequest, res: Response, next: NextFunction) : Promise<void> => {
     
     let path : string = req.path;

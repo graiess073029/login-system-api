@@ -3,6 +3,13 @@ import { SqlResponse } from "../../types/types.js";
 import { log } from "../../utils/log.js";
 import pool from "../initPool.js";
 
+/**
+ * Deletes a user account from the database.
+ *
+ * @param id - The unique identifier of the user to be deleted.
+ * @returns A promise that resolves to a SqlResponse indicating the success or failure of the deletion operation.
+ */
+
 export const deleteUser = async (
     id: string,
 ): Promise<SqlResponse> => {

@@ -4,9 +4,24 @@ import { SqlResponse, SqlResponses} from '../../types/types.js'
 import { log } from '../../utils/log.js';
 import pool from '../initPool.js';
 
-export const setSecuritySettings = async (userParams : {id : number , username : string , currentPassword : string , newPassword : string }) : Promise< SqlResponse |SqlResponses>  => {
+    /**
+     * @description This function updates the security settings of a user in the database.
+     *              It takes the user's id, username, current password and new password as parameters
+     *              It will verify if the current password is correct and update the password if it is
+     *              It will also return a response to the user with a success or error message
+     * @param userParams - An object with the following properties:
+     *   - id: number - The id of the user
+     *   - username: string - The username of the user
+     *   - currentPassword: string - The current password of the user
+     *   - newPassword: string - The new password of the user
+     * @returns SqlResponse | SqlResponses - A response object with a message and a state
+     * 
+     * @throws Error - If the user is not found or if an error occurs
+     */
 
-    let { username , id , currentPassword, newPassword} = userParams;
+export const setSecuritySettings = async (userParams : {id : number , username : string , newPassword : string }) : Promise< SqlResponse |SqlResponses>  => {
+
+    let { username , id , newPassword} = userParams;
 
     newPassword = await bcrypt.hash(newPassword, 10)
 
@@ -15,10 +30,8 @@ export const setSecuritySettings = async (userParams : {id : number , username :
 
     .then(
         async (res) => {
-            let date = new Date().toString()
-            let message = `-----\n Query : ${query}\n Date : ${date}\n-----\n`
 
-            await log(message, "info")
+            await log(`Query : ${query}`,'info')
 
             let response : SqlResponse;
 
@@ -42,7 +55,7 @@ export const setSecuritySettings = async (userParams : {id : number , username :
     .catch(
         async (err : Error) => { 
 
-            await log(err.message, "info")
+            await log(err.message, "error")
 
             let response : SqlResponse = {
                 state : "error",
@@ -81,7 +94,7 @@ export const setSecuritySettings = async (userParams : {id : number , username :
     .catch(
         async (err : Error) => { 
 
-            await log(err.message, "info")
+            await log(err.message, "error")
 
             let response : SqlResponse = {
                 state : "error",

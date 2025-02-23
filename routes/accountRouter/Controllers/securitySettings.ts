@@ -6,6 +6,12 @@ import { setSecuritySettings } from "../../../db/accountTable/setSecuritySetting
 import {config} from '../../../config.js'
 import bcrypt from "bcryptjs";
 
+    /**
+     * This function is used to update the user's password.
+     * It will check if the current password is correct and update the password if it is.
+     * It will also return a response to the user with a success or error message.
+     */
+    
 export const securitySettings : RequestHandler = async (req: Request, res: CustomResponse, next: NextFunction): Promise<any> => {
 
     try{
@@ -41,7 +47,7 @@ export const securitySettings : RequestHandler = async (req: Request, res: Custo
             if (password_verification && test_password) {
     
     // Updating the password of the user
-                const password_update = await setSecuritySettings({id , username , newPassword , currentPassword}).then(
+                const password_update = await setSecuritySettings({id , username , newPassword}).then(
                     async (res: SqlResponses | SqlResponse) => {
                         let DbResponse : SqlResponse | SqlResponses = [(res as any).password_Date_Update.state,(res as any).passwordUpdateQuery.state].includes("success") ? { state: "success", message: "password updated successfully" } : res
                         let finalResponse : any = 

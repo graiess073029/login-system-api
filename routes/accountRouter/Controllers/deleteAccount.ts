@@ -3,6 +3,11 @@ import { authToken, CustomResponse, HttpResponse } from "../../../types/types.js
 import jwt from "jsonwebtoken";
 import { deleteUser } from "../../../db/accountTable/deleteUser.js";
 
+/**
+ * Handles the deletion of a user account by validating the request's
+ * authentication token and deleting the user from the database.
+ */
+
 export const deleteAccount: RequestHandler = async (
   req: Request,
   res: CustomResponse,

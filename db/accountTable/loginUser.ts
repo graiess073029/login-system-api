@@ -5,6 +5,17 @@ import pool from '../initPool.js'
 import {config} from '../../config.js'
 import bcrypt from 'bcryptjs'
 
+        /**
+         * This function logs in a user by taking an object with an identifier and a password
+         * and verifying if the identifier is an email or a username and if the password is correct.
+         * The function returns a SqlResponse object with a message and a state.
+         * If the user is found, the function will return a SqlResponse object with a success state and a message that says the user was found.
+         * If the user is not found, the function will return a SqlResponse object with an error state and a message that says the user was not found.
+         * If more than one user is found, the function will return a SqlResponse object with an error state and a message that says more than one user was found.
+         * If an error occurs, the function will return a SqlResponse object with an error state and a message that says an error occurred.
+         * @param userParams an object with an identifier and a password
+         * @returns a SqlResponse object with a message and a state
+         */
 export const loginUser = async (userParams : userLoginParams) : Promise<SqlResponse>  => {
 
     let response : SqlResponse;
@@ -53,7 +64,7 @@ export const loginUser = async (userParams : userLoginParams) : Promise<SqlRespo
 
     catch(err){
             
-            await log((err as Error).message, "info")
+            await log((err as Error).message, "error")
             
             response  = {
                 state : "error",
@@ -69,10 +80,8 @@ export const loginUser = async (userParams : userLoginParams) : Promise<SqlRespo
 
         let [res , rowsAffected] = await pool.query(query)
 
-        let date = new Date().toString()
-        let message = `-----\n Query : ${query}\n Date : ${date}\n-----\n`
+        await log(`Query : ${query}`,'info')
 
-        await log(message, "info")
 
         response  = {
             state : "success",
@@ -83,7 +92,7 @@ export const loginUser = async (userParams : userLoginParams) : Promise<SqlRespo
 
     }
     catch(err){            
-        await log((err as Error).message, "info")
+        await log((err as Error).message, "error")
         
         let response : SqlResponse = {
             state : "error",
