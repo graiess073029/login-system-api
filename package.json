@@ -1,7 +1,7 @@
 {
-  "name": "api2",
+  "name": "login-system-api",
   "version": "1.0.0",
-  "main": "dist/index.js",
+  "main": "index.ts",
   "type": "module",
   "scripts": {
     "build": "tsc",
@@ -9,8 +9,8 @@
     "dev": "nodemon",
     "test": "jest"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["login","registration","user management","authentification"],
+  "author": "Graiess Youssef",
   "license": "ISC",
   "description": "",
   "dependencies": {
