@@ -1,5 +1,5 @@
 import { setGeneralSettings } from './../../../db/accountTable/setGeneralSettings.js';
-import { NextFunction ,Response, Request, RequestHandler } from "express"
+import { NextFunction , Request, RequestHandler } from "express"
 import { CustomResponse, HttpResponse, User } from "../../../types/types.js";
 import {config} from '../../../config.js'
 import jwt, { JwtPayload } from 'jsonwebtoken'

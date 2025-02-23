@@ -1,3 +1,4 @@
+import bcrypt from 'bcryptjs';
 import {config} from '../../config.js'
 import { SqlResponse, SqlResponses} from '../../types/types.js'
 import { log } from '../../utils/log.js';
@@ -7,7 +8,9 @@ export const setSecuritySettings = async (userParams : {id : number , username :
 
     let { username , id , currentPassword, newPassword} = userParams;
 
-    let query : string = `UPDATE ${config.database.tableName} SET password="${newPassword}" WHERE id="${id}" AND username="${username}" AND password="${currentPassword}";`;
+    newPassword = await bcrypt.hash(newPassword, 10)
+
+    let query : string = `UPDATE ${config.database.tableName} SET password="${newPassword}" WHERE id="${id}" AND username="${username}";`;
     let passwordUpdateQuery = await pool.query(query)
 
     .then(
@@ -50,12 +53,12 @@ export const setSecuritySettings = async (userParams : {id : number , username :
         }
     )
 
-
-    query = `UPDATE ${config.database.tableName} SET password_updated_at = CURRENT_TIMESTAMP `
-
     if (passwordUpdateQuery.state === "error"){
         return passwordUpdateQuery
     }
+
+    query = `UPDATE ${config.database.tableName} SET password_updated_at = CURRENT_TIMESTAMP WHERE id="${id}" AND username="${username}";`;
+
 
     let password_Date_Update = await pool.query(query)
     .then(
@@ -88,9 +91,6 @@ export const setSecuritySettings = async (userParams : {id : number , username :
             return response
         }
     )
-
-
-
 
     return { passwordUpdateQuery , password_Date_Update}
     

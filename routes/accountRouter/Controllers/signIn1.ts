@@ -6,6 +6,7 @@ import { generateId } from "../../../utils/generatingId.js";
 import {config} from '../../../config.js'
 import isEmail  from "validator/lib/isEmail.js";
 import isStrongPassword from "validator/lib/isStrongPassword.js";
+import bcrypt from "bcryptjs";
 export const signIn1: RequestHandler = async (
     req: Request,
     res: CustomResponse,
@@ -76,10 +77,14 @@ export const signIn1: RequestHandler = async (
 
         let id = await generateId();
 
+
+        // Hashing the password
+        const hashedPassword : string = await bcrypt.hash(password, 10);
+
         // Creating a user and saving it in the database
         const user1_creation = await createUser1({
             username,
-            password,
+            password : hashedPassword,
             email,
             id,
         }) as SqlResponse;

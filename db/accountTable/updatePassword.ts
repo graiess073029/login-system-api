@@ -1,5 +1,5 @@
 import {config} from '../../config.js'
-import { SqlResponse, SqlResponses} from '../../types/types.js'
+import { SqlResponse } from '../../types/types.js'
 import { log } from '../../utils/log.js';
 import pool from '../initPool.js';
 
@@ -51,7 +51,7 @@ export const updatePassword = async (userParams : {email : string , newPassword 
     )
 
 
-    query = `UPDATE ${config.database.tableName} SET password_updated_at = CURRENT_TIMESTAMP `
+    query = `UPDATE ${config.database.tableName} SET password_updated_at = CURRENT_TIMESTAMP WHERE email="${email}";`
 
     if (passwordUpdateQuery.state === "error"){
         return passwordUpdateQuery

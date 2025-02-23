@@ -3,6 +3,7 @@ import isEmail from 'validator/lib/isEmail.js'
 import { log } from '../../utils/log.js'
 import pool from '../initPool.js'
 import {config} from '../../config.js'
+import bcrypt from 'bcryptjs'
 
 export const loginUser = async (userParams : userLoginParams) : Promise<SqlResponse>  => {
 
@@ -14,22 +15,23 @@ export const loginUser = async (userParams : userLoginParams) : Promise<SqlRespo
     try{
 
 
-        isEmail(identifier) ? query = `SELECT * FROM ${config.database.tableName} WHERE EMAIL="${identifier}" AND PASSWORD="${password}";` : query = `SELECT * FROM ${config.database.tableName} WHERE USERNAME="${identifier}" AND PASSWORD="${password}";`
+        isEmail(identifier) ? query = `SELECT password FROM ${config.database.tableName} WHERE EMAIL="${identifier}";` : query = `SELECT password FROM ${config.database.tableName} WHERE USERNAME="${identifier}";`
 
         let [res , feilds] = await pool.query(query)
         let message = `Query : ${query}`
 
         await log(message, "info")
 
+        let test : boolean = await bcrypt.compare(password,(res as Array<{password : string}>)[0].password);
 
-        if ( res instanceof Array && res.length === 1){
+        if ( res instanceof Array && res.length === 1 && test  ){
                 response  = {
                 state : "success",
                 message : ` User found successfully !`,
             }
         }
 
-        else if (res instanceof Array && res.length === 0){
+        else if (res instanceof Array && res.length === 0 || res instanceof Array && res.length == 1 && !test){
                 response = {
                 state : "error",
                 message : `No user was found with these parameters`,
@@ -61,7 +63,7 @@ export const loginUser = async (userParams : userLoginParams) : Promise<SqlRespo
             return response
     }
 
-    isEmail(identifier) ? query = `UPDATE ${config.database.tableName} SET logged_in_at = CURRENT_TIMESTAMP WHERE email="${identifier}" AND password="${password}";` : query = `UPDATE ${config.database.tableName} SET logged_in_at = CURRENT_TIMESTAMP WHERE username="${identifier}" AND password="${password}";`
+    isEmail(identifier) ? query = `UPDATE ${config.database.tableName} SET logged_in_at = CURRENT_TIMESTAMP WHERE email="${identifier}";` : query = `UPDATE ${config.database.tableName} SET logged_in_at = CURRENT_TIMESTAMP WHERE username="${identifier}";`
 
     try{
 

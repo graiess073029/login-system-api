@@ -4,6 +4,7 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 import { select } from "../../../db/select.js";
 import { setSecuritySettings } from "../../../db/accountTable/setSecuritySettings.js";
 import {config} from '../../../config.js'
+import bcrypt from "bcryptjs";
 
 export const securitySettings : RequestHandler = async (req: Request, res: CustomResponse, next: NextFunction): Promise<any> => {
 
@@ -26,17 +27,18 @@ export const securitySettings : RequestHandler = async (req: Request, res: Custo
             }); return null;
         }   
         
-    
     // Decoding the auth token to get the user's username and id
-            const {id , username} = jwt.decode(req.cookies.authToken) as JwtPayload
+        const {id , username} = jwt.decode(req.cookies.authToken) as JwtPayload
 
     // Verifying if the current password is correct
 
-            const password_verification = (await select(config.database.tableName,"*",`id="${id}" and username="${username}" and password="${currentPassword}"`) as Array<User> )[0]
+        const password_verification = (await select(config.database.tableName,"*",`id="${id}" and username="${username}"`) as Array<User> )[0]
+
+        const test_password : boolean = await bcrypt.compare(currentPassword, password_verification.password)
 
     // Returning the response to the user basing on the result of the loginUser function
     
-            if (password_verification) {
+            if (password_verification && test_password) {
     
     // Updating the password of the user
                 const password_update = await setSecuritySettings({id , username , newPassword , currentPassword}).then(
@@ -51,9 +53,6 @@ export const securitySettings : RequestHandler = async (req: Request, res: Custo
                     }
                 )
     
-    
-
-    
     // Send a response to the user to confirm the password update
                 let response: HttpResponse = {state : password_update.state , message : password_update.message, link: "", statusCode: 200}
                 res.body = response
@@ -61,7 +60,6 @@ export const securitySettings : RequestHandler = async (req: Request, res: Custo
                 next();
                 return;
             }
-
     
     // Returning an error response to the user with the error message    
             let response: HttpResponse = {state : "error" , link : "", message: "Current password is not correct" , statusCode : 400}

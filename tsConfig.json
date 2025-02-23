@@ -10,8 +10,8 @@
     "useUnknownInCatchVariables": true,
     
     "target": "ESNext",
-    "module": "NodeNext",
-    "moduleResolution": "nodenext",
+    "module": "ESNext",
+    "moduleResolution": "node",
     "esModuleInterop": true,
     
     "sourceMap": true,

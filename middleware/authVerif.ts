@@ -67,6 +67,8 @@ export const authVerif : RequestHandler = async (req: CustomRequest, res: Respon
                 state: "redirection",
                 statusCode: 401
             };
+
+            res.clearCookie("authToken",config.cookies)
             res.status(response.statusCode).json(response); // Sending a response if the user does not exist
             return ;
         }  

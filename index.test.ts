@@ -1,10 +1,12 @@
-import { afterAll, expect } from "@jest/globals"
+import { afterAll, beforeAll, expect } from "@jest/globals"
 import { describe, it } from '@jest/globals';
 import request from 'supertest';
-import server from "./app";
-import { deleteUser } from "./db/accountTable/deleteUser";
-import { select } from "./db/select";
-import pool from "./db/initPool";
+import server from "./app.js";
+import { deleteUser } from "./db/accountTable/deleteUser.js";
+import { select } from "./db/select.js";
+import pool from "./db/initPool.js";
+import { config } from "./config.js";
+import { QueryResult } from "mysql2/index.js";
 
 
 /*
@@ -51,6 +53,8 @@ describe('Input validation tests',() => {
         expect(response.body).toEqual({
             state: "error",
             message: "Please write a valid email or username",
+            link : "",
+            statusCode: 400
         });
     });
 
@@ -59,7 +63,9 @@ describe('Input validation tests',() => {
         expect(response.status).toBe(400);
         expect(response.body).toEqual({
             state: "error",
-            message: "Please write your password"
+            message: "Please write your password",
+            link : "",
+            statusCode: 400
         });
     });
 
@@ -68,7 +74,9 @@ describe('Input validation tests',() => {
         expect(response.status).toBe(400);
         expect(response.body).toEqual({
             state: "error",
-            message: "Please write a valid email"
+            message: "Please write a valid email",
+            link : "",
+            statusCode: 400
         });
     });
 
@@ -128,17 +136,23 @@ describe('Input validation tests',() => {
 
 })
 
-describe("Functionality tests", () => {
+describe("Functionality tests",  () => {
 
     const agent = request.agent(server)
 
+    beforeAll( async () => {
+
+        // Deleting the test user / users if it exists.
+
+        const user_id : Array<{id : string}> = await select(config.database.tableName,"id","username='test' OR username='test2' OR username='test3'") as Array<{id : string}>
+
+        await Promise.all(user_id.map( async (id_object) => await deleteUser(id_object.id)))
+
+    })
+
+
+
     it("Creating a new user", async () => {
-
-        // Making sure that the user does not exist
-
-        const user_id : string  = (await select("ACCOUNTS","id",`username="test" OR username="test2" OR username="test3"`) as Array<{id : string}>)[0]?.id
-
-        user_id && await deleteUser(user_id)
 
         const response = await agent.post("/account/signin").send({
             email: "email.test@test.com",
@@ -154,7 +168,7 @@ describe("Functionality tests", () => {
         })
 
 
-    })
+    }, 10000)
 
     it("Logging in just after signing in", async () => {
         
@@ -170,7 +184,7 @@ describe("Functionality tests", () => {
             statusCode: 403
         })
 
-    })
+    }, 10000)
 
     it("Logging out", async () => {
         
@@ -178,7 +192,7 @@ describe("Functionality tests", () => {
 
         expect(response.body).toEqual({state : "redirection", message : 'logged out successfullly' ,link : '/account/login', statusCode : 200})
 
-    })
+    }, 10000)
 
     it("Logging in (using the username and the email)", async () => {
 
@@ -207,7 +221,7 @@ describe("Functionality tests", () => {
         })
 
 
-    })
+    }, 10000)
 
     it('Getting general settings (user info : username - email)', async () => {
 
@@ -220,7 +234,7 @@ describe("Functionality tests", () => {
             message : expect.objectContaining({email : expect.any(String), username : expect.any(String)})
         })
 
-    })
+    }, 10000)
 
     it('Updating username', async () => {
 
@@ -232,7 +246,7 @@ describe("Functionality tests", () => {
             link: "",
             statusCode: 200,
         })
-    })
+    }, 10000)
 
     it('Updating email', async () => {
 
@@ -244,7 +258,7 @@ describe("Functionality tests", () => {
             link: "",
             statusCode: 200,
         })
-    })
+    }, 10000)
 
     it('Updating username and email', async () => {
 
@@ -260,7 +274,7 @@ describe("Functionality tests", () => {
             link: "",
             statusCode: 200,
         })
-    })
+    }, 10000)
 
     it('Updating password', async () => {
 
@@ -277,7 +291,7 @@ describe("Functionality tests", () => {
             link: "",
             statusCode: 200,
         })
-    })
+    }, 10000)
 
 
     it('Deleting the user', async () => {
@@ -297,7 +311,7 @@ describe("Functionality tests", () => {
             link: "/account/login",
             statusCode: 200,
         })
-    })
+    }, 10000)
 
 
 })

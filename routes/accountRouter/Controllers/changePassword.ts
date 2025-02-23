@@ -5,6 +5,7 @@ import { CustomResponse, HttpResponse, resetToken } from "../../../types/types.j
 import { select } from '../../../db/select.js';
 import { deleteToken } from '../../../db/resetTable/deleteToken.js';
 import { updateState } from '../../../db/resetTable/updateState.js';
+import bcrypt from 'bcryptjs';
 
 export const changePassword : RequestHandler = async (req: Request, res: CustomResponse, next: NextFunction): Promise<any> => {
 
@@ -101,6 +102,7 @@ export const changePassword : RequestHandler = async (req: Request, res: CustomR
     
     // Decoding the auth token to get the user's username and id
 
+            newPassword = await bcrypt.hash(newPassword,10)
 
             let password_update = await updatePassword({email , newPassword});
             await updateState(2,email,reset_token)
