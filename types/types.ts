@@ -31,6 +31,7 @@ export interface mailerParams {
 
 export interface appConfig{
 
+  origin : Array<string> | string,
   cookies : CookieOptions,
   database : databaseParams,
   mailer : mailerParams,

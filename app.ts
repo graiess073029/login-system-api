@@ -12,22 +12,18 @@ import cookieParser from 'cookie-parser'
 import express,  { Application, NextFunction , Request } from "express"
 import { HttpResponse } from './types/types.js';
 import { CustomResponse } from './types/types.js';
+import { config } from './config.js';
 
 /**
  * @fileoverview Main Express application setup and configuration
  * Configures middleware, session handling, and routes for the authentication API
  */
 
-
-dotenv.config()
- 
-
-
 const app: Application = express()
 const server = createServer(app)
 
 const corsOptions = {
-    origin: process.env.ORIGIN?.includes("[") ? JSON.parse(process.env.ORIGIN) : process.env.ORIGIN, 
+    origin: config.origin, 
     methods: 'GET,POST,PUT,DELETE', 
     credentials: true, 
     optionsSuccessStatus: 200 
@@ -72,7 +68,6 @@ app.get("/", async (req: Request, res: CustomResponse, next : NextFunction): Pro
     next()
     return;
 })
-
 
 app.use(errorLogger)
 

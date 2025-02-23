@@ -11,6 +11,8 @@ dotenv.config()
 
 export const config : appConfig = {
     
+    origin : process.env.ORIGIN?.includes("[") ? JSON.parse(process.env.ORIGIN) : process.env.ORIGIN,
+
     cookies : {
         sameSite : "lax",
         secure : false,
