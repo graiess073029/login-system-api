@@ -120,7 +120,7 @@ export const authVerif : RequestHandler = async (req: CustomRequest, res: Respon
         // Sends a response to the user when the user is authorized
         if (authPath == path && decodedToken.state === "logged_in") {
             let response: HttpResponse = {
-                message: "Authorized user.",
+                message: "authorized user.",
                 link: "",
                 state: "success",
                 statusCode: 200
@@ -157,7 +157,7 @@ export const authVerif : RequestHandler = async (req: CustomRequest, res: Respon
         // Handling other errors
         let response: HttpResponse = {
             statusCode: 401,
-            message: `Unauthorized user.`,
+            message: `unauthorized user`,
             link: "/account/login",
             state: "redirection"
         };

@@ -11,9 +11,9 @@ This User Authentication API is a production-ready, secure authentication and us
 ### Perfect For :
 - Web Applications 
 - Mobile App Backends 
-- SaaS Platforms 
-- Enterprise Solutions 
--  Microservices Architecture
+- Microservices Architecture
+- Ecommerce websites
+
 
 ## Features
 
@@ -48,13 +48,6 @@ This User Authentication API is a production-ready, secure authentication and us
 -   Input sanitization
 -   Secure session handling
 -  Immune against SQL Injections
-
-### Prerequisites : 
-
--   Node.js (v14 or higher)
--   MySQL (v8 or higher)
--   TypeScript (v4.5 or higher)
--   npm or yarn
 
 ## Installation  
 
@@ -118,7 +111,6 @@ npm run dev
 ```
 npm run build
 npm run start
-
 ```
 
 ### Testing : 
@@ -127,6 +119,32 @@ Run the test suite:
 
 ```
 npm run test
+```
+
+## Integration
+It is very simple to integrate this api in your apps and services:
+    1. Make sure the api is running seperately from your main app (they don't share the same port or processes...)
+    2. Making **GET** or **POST** requests to the api and direct the user basing on the api response :  
+- **Exemple** :
+to know if a user is logged in and has a valid account, you need to fetch **GET /account/auth/** and basing on the response you build your app.  
+  - **Response exemple** : you redirect the user to the login page
+```json
+{
+    "state" : "redirection",
+    "link" : "/account/login",
+    "message" : "unauthorized user",
+    "statusCode" : 401
+}
+```
+
+  - **Response exemple** : you let the user use your app 
+```json
+{
+    "state" : "success",
+    "link" : "",
+    "message" : "authorized user",
+    "statusCode" : 200
+}
 ```
 
 ## API Documentation
