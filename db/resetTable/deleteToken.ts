@@ -1,12 +1,14 @@
 import { log } from "../../utils/log.js";
 import { SqlResponse } from "../../types/types.js";
 import pool from '../initPool.js'
+import { config } from "../../config.js";
+
 
 
 export const deleteToken = async(token : string) : Promise<SqlResponse> => {
     
     try{
-        let query = `DELETE FROM RESET_PASSWORD WHERE reset_token="${token}";`;
+        let query = `DELETE FROM ${config.database.resetPasswordTableName} WHERE reset_token="${token}";`;
         await pool.query(query)
         let message = `Query : ${query}`
 

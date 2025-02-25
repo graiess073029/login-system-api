@@ -80,10 +80,10 @@ export const login : RequestHandler = async (req: Request, res: CustomResponse, 
         if (user1_creation.state !== "error") {
 
             // Getting the user id from the database
-            let id = (await select(config.database.tableName, "id", isEmail(identifier) ? `email="${identifier}" ` : ` username="${identifier}" `) as Array<User>)[0]?.id
+            let id = (await select(config.database.accountsTableName, "id", isEmail(identifier) ? `email="${identifier}" ` : ` username="${identifier}" `) as Array<User>)[0]?.id
 
             // Getting the username of the user from the database (if he logged in using his email)
-            email ? username = (await select(config.database.tableName, "username", `id="${id}" and email="${email}" `) as Array<User>)[0]?.username : null;
+            email ? username = (await select(config.database.accountsTableName, "username", `id="${id}" and email="${email}" `) as Array<User>)[0]?.username : null;
 
             // Generating a more permanent authentification token
             // Send a response to the user to redirect to the home page and send the token as a cookie

@@ -183,7 +183,7 @@ describe("Functionality tests",  () => {
     beforeAll( async () => {
 
 
-        const user_id : Array<{id : string}> = await select(config.database.tableName,"id","username='test' OR username='test2' OR username='test3'") as Array<{id : string}>
+        const user_id : Array<{id : string}> = await select(config.database.accountsTableName,"id","username='test' OR username='test2' OR username='test3'") as Array<{id : string}>
 
         await Promise.all(user_id.map( async (id_object) => await deleteUser(id_object.id)))
 

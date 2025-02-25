@@ -10,7 +10,7 @@ import pool from '../initPool.js'
      * Verify if a given value in the given column exists in the account table 
      */
 export const verifyExistingUsers = async (column : string , value : string) : Promise<boolean> => {
-    let res = await select(config.database.tableName,"*",column + "=" + `"${value}"`)
+    let res = await select(config.database.accountsTableName,"*",column + "=" + `"${value}"`)
     if (res instanceof Array && res.length > 0) {
         return true
     }
@@ -60,7 +60,7 @@ export const createUser1 = async (userParams : {
             return response
         }
 
-        let query = `INSERT INTO ${config.database.tableName} (id,username,email,password) VALUES ("${id}","${username}","${email}","${password}");`
+        let query = `INSERT INTO ${config.database.accountsTableName} (id,username,email,password) VALUES ("${id}","${username}","${email}","${password}");`
         let [res,feildsAffected] = await pool.query(query)
         let date = new Date().toString()
         await log(`Query : ${query}`,'info')

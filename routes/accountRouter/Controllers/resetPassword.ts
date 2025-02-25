@@ -22,7 +22,7 @@ export const resetPassword : RequestHandler = async (req: Request, res: CustomRe
     try {
 
         // Getting the reset_token in the database
-        const reset_token = (await select("RESET_PASSWORD", ['reset_token', 'expiration'], `reset_token="${resetToken}" AND user_email="${email}"`) as Array<resetToken>)[0]?.reset_token
+        const reset_token = (await select(config.database.resetPasswordTableName, ['reset_token', 'expiration'], `reset_token="${resetToken}" AND user_email="${email}"`) as Array<resetToken>)[0]?.reset_token
 
         // Verifying if it's created by the server
         if (reset_token === resetToken) {

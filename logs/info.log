@@ -82,3 +82,87 @@ Sun Feb 23 2025 20:42:37 GMT+0100 (heure normale d’Europe centrale)Query : SEL
 Sun Feb 23 2025 20:42:37 GMT+0100 (heure normale d’Europe centrale)Query : SELECT * FROM ACCOUNTS WHERE id="R4#aBe^JT-*Fb$]" and username="test3";
 
 Sun Feb 23 2025 20:42:37 GMT+0100 (heure normale d’Europe centrale)Query : DELETE FROM ACCOUNTS WHERE id="R4#aBe^JT-*Fb$]";
+
+Tue Feb 25 2025 12:20:16 GMT+0100 (heure normale d’Europe centrale)Database launched Successfully.
+
+Tue Feb 25 2025 12:20:17 GMT+0100 (heure normale d’Europe centrale)You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE username='test' OR username='test2' OR username='test3'' at line 1
+
+Tue Feb 25 2025 12:20:17 GMT+0100 (heure normale d’Europe centrale)You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE username="test"' at line 1
+
+Tue Feb 25 2025 12:20:17 GMT+0100 (heure normale d’Europe centrale)You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE email="email.test@test.com"' at line 1
+
+Tue Feb 25 2025 12:20:49 GMT+0100 (heure normale d’Europe centrale)Server in action
+
+Tue Feb 25 2025 12:20:50 GMT+0100 (heure normale d’Europe centrale)Database launched Successfully.
+
+Tue Feb 25 2025 12:22:30 GMT+0100 (heure normale d’Europe centrale)Database launched Successfully.
+
+Tue Feb 25 2025 12:22:30 GMT+0100 (heure normale d’Europe centrale)Query : SELECT id FROM ACCOUNTS WHERE username='test' OR username='test2' OR username='test3';
+
+Tue Feb 25 2025 12:22:31 GMT+0100 (heure normale d’Europe centrale)Query : SELECT * FROM ACCOUNTS WHERE username="test";
+
+Tue Feb 25 2025 12:22:31 GMT+0100 (heure normale d’Europe centrale)Query : SELECT * FROM ACCOUNTS WHERE email="email.test@test.com";
+
+Tue Feb 25 2025 12:22:31 GMT+0100 (heure normale d’Europe centrale)Query : INSERT INTO ACCOUNTS (id,username,email,password) VALUES ("K#vjYVbMpr+N1[B","test","email.test@test.com","$2b$10$/a0GKAg9z8lu3T5QNBTZ9O2wCM2gqDxrVaiVnm3GcrKA8bkggt.9K");
+
+Tue Feb 25 2025 12:22:31 GMT+0100 (heure normale d’Europe centrale)Query : SELECT * FROM ACCOUNTS WHERE id="K#vjYVbMpr+N1[B" and username="test";
+
+Tue Feb 25 2025 12:22:31 GMT+0100 (heure normale d’Europe centrale)Query : SELECT * FROM ACCOUNTS WHERE id="K#vjYVbMpr+N1[B" and username="test";
+
+Tue Feb 25 2025 12:22:31 GMT+0100 (heure normale d’Europe centrale)Query : SELECT password FROM ACCOUNTS WHERE EMAIL="email.test@test.com";
+
+Tue Feb 25 2025 12:22:31 GMT+0100 (heure normale d’Europe centrale)Query : UPDATE ACCOUNTS SET logged_in_at = CURRENT_TIMESTAMP WHERE email="email.test@test.com";
+
+Tue Feb 25 2025 12:22:31 GMT+0100 (heure normale d’Europe centrale)Query : SELECT id FROM ACCOUNTS WHERE email="email.test@test.com" ;
+
+Tue Feb 25 2025 12:22:32 GMT+0100 (heure normale d’Europe centrale)Query : SELECT username FROM ACCOUNTS WHERE id="K#vjYVbMpr+N1[B" and email="email.test@test.com" ;
+
+Tue Feb 25 2025 12:22:32 GMT+0100 (heure normale d’Europe centrale)Query : SELECT password FROM ACCOUNTS WHERE USERNAME="test";
+
+Tue Feb 25 2025 12:22:32 GMT+0100 (heure normale d’Europe centrale)Query : UPDATE ACCOUNTS SET logged_in_at = CURRENT_TIMESTAMP WHERE username="test";
+
+Tue Feb 25 2025 12:22:32 GMT+0100 (heure normale d’Europe centrale)Query : SELECT id FROM ACCOUNTS WHERE  username="test" ;
+
+Tue Feb 25 2025 12:22:32 GMT+0100 (heure normale d’Europe centrale)Query : SELECT * FROM ACCOUNTS WHERE id="K#vjYVbMpr+N1[B" and username="test";
+
+Tue Feb 25 2025 12:22:32 GMT+0100 (heure normale d’Europe centrale)Query : SELECT email FROM ACCOUNTS WHERE  username="test" and id="K#vjYVbMpr+N1[B";
+
+Tue Feb 25 2025 12:22:32 GMT+0100 (heure normale d’Europe centrale)Query : SELECT * FROM ACCOUNTS WHERE id="K#vjYVbMpr+N1[B" and username="test";
+
+Tue Feb 25 2025 12:22:32 GMT+0100 (heure normale d’Europe centrale)Query : SELECT * FROM ACCOUNTS WHERE username="test2";
+
+Tue Feb 25 2025 12:22:32 GMT+0100 (heure normale d’Europe centrale)Query : UPDATE ACCOUNTS SET username="test2" WHERE id="K#vjYVbMpr+N1[B" AND username="test";
+
+Tue Feb 25 2025 12:22:32 GMT+0100 (heure normale d’Europe centrale)Query : SELECT * FROM ACCOUNTS WHERE id="K#vjYVbMpr+N1[B" and username="test2";
+
+Tue Feb 25 2025 12:22:33 GMT+0100 (heure normale d’Europe centrale)Query : SELECT * FROM ACCOUNTS WHERE email="email.test2@test.com";
+
+Tue Feb 25 2025 12:22:33 GMT+0100 (heure normale d’Europe centrale)Query :  UPDATE ACCOUNTS SET email="email.test2@test.com" WHERE id="K#vjYVbMpr+N1[B" AND username="test2";
+
+Tue Feb 25 2025 12:22:33 GMT+0100 (heure normale d’Europe centrale)Query : SELECT * FROM ACCOUNTS WHERE id="K#vjYVbMpr+N1[B" and username="test2";
+
+Tue Feb 25 2025 12:22:33 GMT+0100 (heure normale d’Europe centrale)Query : SELECT * FROM ACCOUNTS WHERE email="email.test3@test.com";
+
+Tue Feb 25 2025 12:22:33 GMT+0100 (heure normale d’Europe centrale)Query : SELECT * FROM ACCOUNTS WHERE username="test3";
+
+Tue Feb 25 2025 12:22:33 GMT+0100 (heure normale d’Europe centrale)Query :  UPDATE ACCOUNTS SET username="test3", email="email.test3@test.com" WHERE id="K#vjYVbMpr+N1[B" AND username="test2";
+
+Tue Feb 25 2025 12:22:33 GMT+0100 (heure normale d’Europe centrale)Query : SELECT * FROM ACCOUNTS WHERE id="K#vjYVbMpr+N1[B" and username="test3";
+
+Tue Feb 25 2025 12:22:33 GMT+0100 (heure normale d’Europe centrale)Query : SELECT * FROM ACCOUNTS WHERE id="K#vjYVbMpr+N1[B" and username="test3";
+
+Tue Feb 25 2025 12:22:34 GMT+0100 (heure normale d’Europe centrale)Query : UPDATE ACCOUNTS SET password="$2b$10$/qPAab0/PQbS6MYYVVswEuyWkKTGbdVMj9iOPSHZ5cywaTzKrLYPy" WHERE id="K#vjYVbMpr+N1[B" AND username="test3";
+
+Tue Feb 25 2025 12:22:34 GMT+0100 (heure normale d’Europe centrale)Query : UPDATE ACCOUNTS SET password_updated_at = CURRENT_TIMESTAMP WHERE id="K#vjYVbMpr+N1[B" AND username="test3";
+
+Tue Feb 25 2025 12:22:34 GMT+0100 (heure normale d’Europe centrale)Query : SELECT * FROM ACCOUNTS WHERE id="K#vjYVbMpr+N1[B" and username="test3";
+
+Tue Feb 25 2025 12:22:34 GMT+0100 (heure normale d’Europe centrale)Query : SELECT password FROM ACCOUNTS WHERE USERNAME="test3";
+
+Tue Feb 25 2025 12:22:34 GMT+0100 (heure normale d’Europe centrale)Query : UPDATE ACCOUNTS SET logged_in_at = CURRENT_TIMESTAMP WHERE username="test3";
+
+Tue Feb 25 2025 12:22:34 GMT+0100 (heure normale d’Europe centrale)Query : SELECT id FROM ACCOUNTS WHERE  username="test3" ;
+
+Tue Feb 25 2025 12:22:34 GMT+0100 (heure normale d’Europe centrale)Query : SELECT * FROM ACCOUNTS WHERE id="K#vjYVbMpr+N1[B" and username="test3";
+
+Tue Feb 25 2025 12:22:34 GMT+0100 (heure normale d’Europe centrale)Query : DELETE FROM ACCOUNTS WHERE id="K#vjYVbMpr+N1[B";

@@ -25,7 +25,7 @@ export const setSecuritySettings = async (userParams : {id : number , username :
 
     newPassword = await bcrypt.hash(newPassword, 10)
 
-    let query : string = `UPDATE ${config.database.tableName} SET password="${newPassword}" WHERE id="${id}" AND username="${username}";`;
+    let query : string = `UPDATE ${config.database.accountsTableName} SET password="${newPassword}" WHERE id="${id}" AND username="${username}";`;
     let passwordUpdateQuery = await pool.query(query)
 
     .then(
@@ -70,7 +70,7 @@ export const setSecuritySettings = async (userParams : {id : number , username :
         return passwordUpdateQuery
     }
 
-    query = `UPDATE ${config.database.tableName} SET password_updated_at = CURRENT_TIMESTAMP WHERE id="${id}" AND username="${username}";`;
+    query = `UPDATE ${config.database.accountsTableName} SET password_updated_at = CURRENT_TIMESTAMP WHERE id="${id}" AND username="${username}";`;
 
 
     let password_Date_Update = await pool.query(query)

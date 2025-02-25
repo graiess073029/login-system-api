@@ -26,7 +26,7 @@ export const loginUser = async (userParams : userLoginParams) : Promise<SqlRespo
     try{
 
 
-        isEmail(identifier) ? query = `SELECT password FROM ${config.database.tableName} WHERE EMAIL="${identifier}";` : query = `SELECT password FROM ${config.database.tableName} WHERE USERNAME="${identifier}";`
+        isEmail(identifier) ? query = `SELECT password FROM ${config.database.accountsTableName} WHERE EMAIL="${identifier}";` : query = `SELECT password FROM ${config.database.accountsTableName} WHERE USERNAME="${identifier}";`
 
         let [res , feilds] = await pool.query(query)
         let message = `Query : ${query}`
@@ -74,7 +74,7 @@ export const loginUser = async (userParams : userLoginParams) : Promise<SqlRespo
             return response
     }
 
-    isEmail(identifier) ? query = `UPDATE ${config.database.tableName} SET logged_in_at = CURRENT_TIMESTAMP WHERE email="${identifier}";` : query = `UPDATE ${config.database.tableName} SET logged_in_at = CURRENT_TIMESTAMP WHERE username="${identifier}";`
+    isEmail(identifier) ? query = `UPDATE ${config.database.accountsTableName} SET logged_in_at = CURRENT_TIMESTAMP WHERE email="${identifier}";` : query = `UPDATE ${config.database.accountsTableName} SET logged_in_at = CURRENT_TIMESTAMP WHERE username="${identifier}";`
 
     try{
 

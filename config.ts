@@ -25,7 +25,8 @@ export const config : appConfig = {
         database : process.env.DB || "",
         host : process.env.HOST || "",
         port : Number(process.env.PORT) || 3306,
-        tableName : process.env.TABLE_NAME || ""
+        accountsTableName : process.env.ACCOUNTS_TABLE_NAME || "",
+        resetPasswordTableName : process.env.RESET_TOKEN_TABLE_NAME || "",
     },
 
     jwtAuth : {

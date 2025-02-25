@@ -66,7 +66,7 @@ export const getGeneralSettings : RequestHandler = async (req: Request, res: Cus
     
     // Getting the firstName, lastName and bio of the user
             
-        const email : string | undefined = (await select(config.database.tableName,"email",` username="${username}" and id="${id}"`) as Array<User>)[0]?.email
+        const email : string | undefined = (await select(config.database.accountsTableName,"email",` username="${username}" and id="${id}"`) as Array<User>)[0]?.email
 
     // Send a response to the user that contains the email and username requested
             

@@ -1,3 +1,37 @@
 
 Sun Feb 23 2025 20:31:53 GMT+0100 (heure normale d’Europe centrale)
 Sun Feb 23 2025 20:35:06 GMT+0100 (heure normale d’Europe centrale)
+Tue Feb 25 2025 12:20:17 GMT+0100 (heure normale d’Europe centrale)You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(id,username,email,password) VALUES ("xo=_Y(m%TchLZ0_","test","email.test@test.c' at line 1
+
+Tue Feb 25 2025 12:20:17 GMT+0100 (heure normale d’Europe centrale) Name :  Error Message :  You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(id,username,email,password) VALUES ("xo=_Y(m%TchLZ0_","test","email.test@test.c' at line 1Stack :  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(id,username,email,password) VALUES ("xo=_Y(m%TchLZ0_","test","email.test@test.c' at line 1
+    at signIn1 (/Users/youssef/Documents/User logging api/api2/routes/accountRouter/Controllers/signIn1.ts:142:19)
+
+Tue Feb 25 2025 12:20:17 GMT+0100 (heure normale d’Europe centrale)You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE EMAIL="email.test@test.com"' at line 1
+
+Tue Feb 25 2025 12:20:17 GMT+0100 (heure normale d’Europe centrale) Name :  Error Message :  You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE EMAIL="email.test@test.com"' at line 1Stack :  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE EMAIL="email.test@test.com"' at line 1
+    at login (/Users/youssef/Documents/User logging api/api2/routes/accountRouter/Controllers/login.ts:113:19)
+
+Tue Feb 25 2025 12:20:17 GMT+0100 (heure normale d’Europe centrale)You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE EMAIL="email.test@test.com"' at line 1
+
+Tue Feb 25 2025 12:20:17 GMT+0100 (heure normale d’Europe centrale) Name :  Error Message :  You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE EMAIL="email.test@test.com"' at line 1Stack :  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE EMAIL="email.test@test.com"' at line 1
+    at login (/Users/youssef/Documents/User logging api/api2/routes/accountRouter/Controllers/login.ts:113:19)
+
+Tue Feb 25 2025 12:20:17 GMT+0100 (heure normale d’Europe centrale)You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE USERNAME="test3"' at line 1
+
+Tue Feb 25 2025 12:20:17 GMT+0100 (heure normale d’Europe centrale) Name :  Error Message :  You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE USERNAME="test3"' at line 1Stack :  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE USERNAME="test3"' at line 1
+    at login (/Users/youssef/Documents/User logging api/api2/routes/accountRouter/Controllers/login.ts:113:19)
+
+Tue Feb 25 2025 12:20:56 GMT+0100 (heure normale d’Europe centrale)You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE USERNAME="test"' at line 1
+
+Tue Feb 25 2025 12:20:56 GMT+0100 (heure normale d’Europe centrale) Name :  Error Message :  You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE USERNAME="test"' at line 1Stack :  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE USERNAME="test"' at line 1
+    at login (/Users/youssef/Documents/User logging api/api2/routes/accountRouter/Controllers/login.ts:113:19)
+
+Tue Feb 25 2025 12:20:57 GMT+0100 (heure normale d’Europe centrale)You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE USERNAME="test"' at line 1
+
+Tue Feb 25 2025 12:20:57 GMT+0100 (heure normale d’Europe centrale) Name :  Error Message :  You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE USERNAME="test"' at line 1Stack :  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE USERNAME="test"' at line 1
+    at login (/Users/youssef/Documents/User logging api/api2/routes/accountRouter/Controllers/login.ts:113:19)
+
+Tue Feb 25 2025 12:21:28 GMT+0100 (heure normale d’Europe centrale)You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE USERNAME="test"' at line 1
+
+Tue Feb 25 2025 12:21:28 GMT+0100 (heure normale d’Europe centrale) Name :  Error Message :  You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE USERNAME="test"' at line 1Stack :  Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'WHERE USERNAME="test"' at line 1
+    at login (/Users/youssef/Documents/User logging api/api2/routes/accountRouter/Controllers/login.ts:113:19)

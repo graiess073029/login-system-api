@@ -66,7 +66,7 @@ export const authVerif : RequestHandler = async (req: CustomRequest, res: Respon
         let decodedToken: JwtPayload | authToken = jwt.verify(token, config.jwtAuth.secretKey) as JwtPayload; 
 
         // Getting user infos from the database
-        const userInfo : User = (await select(config.database.tableName,"*",`id="${decodedToken.id}" and username="${decodedToken.username}"`) as Array<User>)[0]; // Querying user information from the database
+        const userInfo : User = (await select(config.database.accountsTableName,"*",`id="${decodedToken.id}" and username="${decodedToken.username}"`) as Array<User>)[0]; // Querying user information from the database
 
         // Sending a response to the user when the user does not exist
         if (!(userInfo)) {

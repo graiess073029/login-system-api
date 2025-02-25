@@ -19,7 +19,8 @@ export interface databaseParams {
   database: string;
   host : string;
   port?: number;
-  tableName : string;
+  accountsTableName : string;
+  resetPasswordTableName : string;
 }
 
 export interface mailerParams {

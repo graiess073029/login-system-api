@@ -14,7 +14,7 @@ export const deleteUser = async (
     id: string,
 ): Promise<SqlResponse> => {
     try {
-        let query = `DELETE FROM ${config.database.tableName} WHERE id="${id}";`;
+        let query = `DELETE FROM ${config.database.accountsTableName} WHERE id="${id}";`;
         await pool.query(query)
         let message = `Query : ${query}`
 

@@ -6,6 +6,7 @@ import { select } from '../../../db/select.js';
 import { deleteToken } from '../../../db/resetTable/deleteToken.js';
 import { updateState } from '../../../db/resetTable/updateState.js';
 import bcrypt from 'bcryptjs';
+import { config } from '../../../config.js';
 
 /**
  * Handles the password reset request by verifying the reset token
@@ -36,7 +37,7 @@ export const changePassword : RequestHandler = async (req: Request, res: CustomR
 
         const {email} = jwt.decode(reset_token) as JwtPayload
 
-        const tokenInfo : resetToken | undefined = (await select("RESET_PASSWORD",'*',`reset_token="${reset_token}"`) as Array<resetToken> )[0]
+        const tokenInfo : resetToken | undefined = (await select(config.database.resetPasswordTableName,'*',`reset_token="${reset_token}"`) as Array<resetToken> )[0]
 
         if(!tokenInfo){
             let response : HttpResponse = {

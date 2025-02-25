@@ -38,7 +38,7 @@ export const securitySettings : RequestHandler = async (req: Request, res: Custo
 
     // Verifying if the current password is correct
 
-        const password_verification = (await select(config.database.tableName,"*",`id="${id}" and username="${username}"`) as Array<User> )[0]
+        const password_verification = (await select(config.database.accountsTableName,"*",`id="${id}" and username="${username}"`) as Array<User> )[0]
 
         const test_password : boolean = await bcrypt.compare(currentPassword, password_verification.password)
 

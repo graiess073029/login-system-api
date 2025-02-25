@@ -44,8 +44,8 @@ export const setGeneralSettings = async (userParams : {id : number , username : 
 
     let query : string;
 
-    !newEmail ? query = `UPDATE ${config.database.tableName} SET username="${newUsername}" WHERE id="${id}" AND username="${username}";` : query = ` UPDATE ${config.database.tableName} SET email="${newEmail}" WHERE id="${id}" AND username="${username}";`;
-    !([newEmail,newUsername].includes(undefined) || [newEmail,newUsername].includes("")) ? query = ` UPDATE ${config.database.tableName} SET username="${newUsername}", email="${newEmail}" WHERE id="${id}" AND username="${username}";` : null;
+    !newEmail ? query = `UPDATE ${config.database.accountsTableName} SET username="${newUsername}" WHERE id="${id}" AND username="${username}";` : query = ` UPDATE ${config.database.accountsTableName} SET email="${newEmail}" WHERE id="${id}" AND username="${username}";`;
+    !([newEmail,newUsername].includes(undefined) || [newEmail,newUsername].includes("")) ? query = ` UPDATE ${config.database.accountsTableName} SET username="${newUsername}", email="${newEmail}" WHERE id="${id}" AND username="${username}";` : null;
 
     let res = await pool.query(query)
 

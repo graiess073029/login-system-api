@@ -10,7 +10,7 @@ export const updatePassword = async (userParams : {email : string , newPassword 
 
     newPassword = await bcrypt.hash(newPassword,10)
 
-    let query : string = `UPDATE ${config.database.tableName} SET password="${newPassword}" WHERE email="${email}";`;
+    let query : string = `UPDATE ${config.database.accountsTableName} SET password="${newPassword}" WHERE email="${email}";`;
     let passwordUpdateQuery = await pool.query(query)
 
     .then(
@@ -52,7 +52,7 @@ export const updatePassword = async (userParams : {email : string , newPassword 
     )
 
 
-    query = `UPDATE ${config.database.tableName} SET password_updated_at = CURRENT_TIMESTAMP WHERE email="${email}";`
+    query = `UPDATE ${config.database.accountsTableName} SET password_updated_at = CURRENT_TIMESTAMP WHERE email="${email}";`
 
     if (passwordUpdateQuery.state === "error"){
         return passwordUpdateQuery
